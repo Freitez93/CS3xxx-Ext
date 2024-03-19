@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element
 
 class Paradisehill : MainAPI() {
     override var mainUrl = "https://en.paradisehill.cc"
-    override var name = "Paradisehill"
+    override var name = "ParadiseHill"
     override val hasMainPage = true
     override val hasDownloadSupport = true
     override var sequentialMainPage = true
@@ -17,12 +17,13 @@ class Paradisehill : MainAPI() {
     override val mainPage = mainPageOf(
         "$mainUrl/all/?sort=created_at&page=" to "New Porn Movies",
         "$mainUrl/popular/?filter=all&sort=by_likes&page=" to "Popular Porn Movies",
-        "$mainUrl/studio/89/?sort=created_at&page=" to "Brazzers",
-        "$mainUrl/studio/29/?sort=created_at&page=" to "Digital Playground",
-        "$mainUrl/studio/16/?sort=created_at&page=" to "Evil Angel",
         "$mainUrl/studio/6/?sort=created_at&page=" to "Bang Bros Productions",
-        "$mainUrl/studio/78/?sort=created_at&page=" to "Jules Jordan Video",
+        "$mainUrl/studio/16/?sort=created_at&page=" to "Evil Angel",
+        "$mainUrl/studio/29/?sort=created_at&page=" to "Digital Playground",
         "$mainUrl/studio/64/?sort=created_at&page=" to "Reality Kings",
+        "$mainUrl/studio/89/?sort=created_at&page=" to "Brazzers",
+        "$mainUrl/studio/637/?sort=created_at&page=" to "Team Skeet",
+        "$mainUrl/studio/950/?sort=created_at&page=" to "Pure Taboo",
     )
 
     override suspend fun getMainPage(
