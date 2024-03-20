@@ -12,7 +12,7 @@ class Pornhub : MainAPI() {
     private val globalTvType = TvType.NSFW
 
     override var mainUrl = "https://www.pornhub.com"
-    override var name = "Pornhub"
+    override var name = "PornHub"
     override val hasMainPage = true
     override val hasChromecastSupport = true
     override val hasDownloadSupport = true
@@ -20,7 +20,14 @@ class Pornhub : MainAPI() {
     override val supportedTypes = setOf(TvType.NSFW)
 
     override val mainPage = mainPageOf(
-        "$mainUrl/video?page=" to "Main Page",
+        "$mainUrl/video?page=" to "Latest Videos",
+        "$mainUrl/video?c=28&page=" to "Maduras",
+        "$mainUrl/video?c=29&page=" to "Milf",
+        "$mainUrl/video?c=89&page=" to "Niñeras",
+        "$mainUrl/video=c=141&page=" to "Detras de Camaras",
+        "$mainUrl/video?c=181&page=" to "Young and Old",
+        "$mainUrl/video?c=444&page=" to "Daughter",
+        "$mainUrl/language/spanish?page=" to "Spanish"
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
