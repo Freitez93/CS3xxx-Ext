@@ -11,7 +11,6 @@ class Pornhub : MainAPI() {
 
     override var mainUrl = "https://www.pornhub.com"
     override var name = "PornHub"
-    override val lang = "en"
     override val hasMainPage = true
     override val hasChromecastSupport = true
     override val hasDownloadSupport = true
