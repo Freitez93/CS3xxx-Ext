@@ -40,6 +40,14 @@ class Pornhub : MainAPI() {
         )
     }
 
+    private fun Element.toSearchResult(): SearchResponse? {
+        val title     = this.selectFirst("a")?.attr("title") ?: return null
+        val link      = this.selectFirst("a")?.attr("href") ?: return null
+        val posterUrl = fixUrlNull(this.selectFirst("img.thumb")?.attr("src"))
+
+        return newMovieSearchResponse(title, link, TvType.Movie) { this.posterUrl = posterUrl }
+    }
+
     override suspend fun search(query: String): List<SearchResponse> {
         val document = app.get("${mainUrl}/video/search?search=${query}").document
 
