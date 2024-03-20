@@ -1,9 +1,10 @@
 package com.jacekun
 
-import android.util.Log
 import com.lagradost.cloudstream3.*
-import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.utils.*
+import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
+import org.jsoup.nodes.Element
+import android.util.Log
 
 class Pornhub : MainAPI() {
     private val globalTvType = TvType.NSFW
