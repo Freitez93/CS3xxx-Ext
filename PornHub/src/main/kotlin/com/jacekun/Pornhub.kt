@@ -18,21 +18,20 @@ class Pornhub : MainAPI() {
     override val vpnStatus = VPNStatus.MightBeNeeded // Cause it's a big site
     override val supportedTypes = setOf(TvType.NSFW)
 
-    override val mainPage =
-        mainPageOf(
-            "${mainUrl}/video?page=" to "Recently Featured",
-            "${mainUrl}/video?o=tr&t=w&hd=1&page=" to "Top Rated",
-            "${mainUrl}/video?c=29&page=" to "Milf",
-            "${mainUrl}/video?c=89&page=" to "Niñeras",
-            "${mainUrl}/video=c=141&page=" to "Detras de Camaras",
-            "${mainUrl}/video?c=181&page=" to "Young and Old",
-            "${mainUrl}/video?c=444&page=" to "Daughter",
-            "${mainUrl}/language/spanish?page=" to "Spanish"
-        )
+    override val mainPage = mainPageOf(
+        "${mainUrl}/video?page=" to "Recently Featured",
+        "${mainUrl}/video?o=tr&t=w&hd=1&page=" to "Top Rated",
+        "${mainUrl}/video?c=29&page=" to "Milf",
+        "${mainUrl}/video?c=89&page=" to "Babysitters",
+        "${mainUrl}/video=c=141&page=" to "Behind the scenes",
+        "${mainUrl}/video?c=181&page=" to "Young and Old",
+        "${mainUrl}/video?c=444&page=" to "Daughter",
+        "${mainUrl}/language/spanish?page=" to "Spanish"
+    )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data + page).document
-        val home = document.select("li.pcVideoListItem").mapNotNull { it.toSearchResult() }
+        val home = document.select("div.sectionWrapper div.wrap").mapNotNull { it.toSearchResult() }
 
         return newHomePageResponse(
             list = HomePageList(name = request.name, list = home, isHorizontalImages = true),
@@ -51,7 +50,7 @@ class Pornhub : MainAPI() {
     override suspend fun search(query: String): List<SearchResponse> {
         val document = app.get("${mainUrl}/video/search?search=${query}").document
 
-        return document.select("li.pcVideoListItem").mapNotNull { it.toSearchResult() }
+        return document.select("div.sectionWrapper div.wrap").mapNotNull { it.toSearchResult() }
     }
 
     override suspend fun quickSearch(query: String): List<SearchResponse> = search(query)
@@ -59,8 +58,7 @@ class Pornhub : MainAPI() {
     override suspend fun load(url: String): LoadResponse? {
         val document = app.get(url).document
 
-        val title =
-            document.selectFirst("h1.title span[class='inlineFree']")?.text()?.trim() ?: return null
+        val title = document.selectFirst("h1.title span[class='inlineFree']")?.text()?.trim() ?: return null
         val description = title
         val poster = fixUrlNull(document.selectFirst("div.mainPlayerDiv img")?.attr("src"))
         val year = Regex("""uploadDate\": \"(\d+)""").find(document.html())?.groupValues?.get(1)?.toIntOrNull()
@@ -69,7 +67,7 @@ class Pornhub : MainAPI() {
         }
         val rating = document.selectFirst("span.percent")?.text()?.first()?.toString()?.toRatingInt()
         val duration = Regex("duration' : '(.*)',").find(document.html())?.groupValues?.get(1)?.toIntOrNull()
-        val actors = document.select("div.pornstarsWrapper a[data-label='Pornstar']").mapNotNull {
+        val actors = document.select("div.pornstarsWrapper a[data-label='pornstar']").mapNotNull {
             Actor(it.text().trim(), it.select("img").attr("src"))
         }
 
