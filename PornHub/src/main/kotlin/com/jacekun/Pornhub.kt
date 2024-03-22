@@ -23,7 +23,7 @@ class Pornhub : MainAPI() {
         "${mainUrl}/video?o=tr&t=w&hd=1&page=" to "Top Rated",
         "${mainUrl}/video?c=29&page=" to "Milf",
         "${mainUrl}/video?c=89&page=" to "Babysitters",
-        "${mainUrl}/video=c=141&page=" to "Behind the scenes",
+        "${mainUrl}/video?c=141&page=" to "Behind the scenes",
         "${mainUrl}/video?c=181&page=" to "Young and Old",
         "${mainUrl}/video?c=444&page=" to "Daughter",
         "${mainUrl}/language/spanish?page=" to "Spanish"
