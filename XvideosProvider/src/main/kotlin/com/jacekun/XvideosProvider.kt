@@ -37,12 +37,9 @@ class XvideosProvider : MainAPI() {
 	override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
 		val categoryData = request.data
 		val categoryName = request.name
-
-		if (categoryData.endsWith('/') || categoryData.endsWith('=')){
+		val pagedLink = if (categoryData.endsWith('/') || categoryData.endsWith('=')){
 			val pagedLink = categoryData + page
-		} else {
-			val pagedLink = categoryData
-		}
+		} else categoryData
 
 		try {
 			val soup = app.get(pagedLink).document
